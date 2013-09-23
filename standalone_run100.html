@@ -1,0 +1,53 @@
+<html>
+<body>
+<script>
+  var x = [];
+  var p = window.performance;
+
+  function xx() { run20(); run5(); }
+
+  function run100a() { run100();run100(); }
+  function run100b() { run100();run100(); }
+  function run100c() { run100();run100(); }
+  function run100d() { run100();run100(); }
+  function run5() {
+    var s = p.now();
+    var e = 0;
+    while (e < 5) {
+      e = p.now() - s;
+    }
+    x.push(e);
+  }
+
+  function run20() {
+    var s = p.now();
+    var e = 0;
+    run5();
+    while (e < 20) {
+      e = p.now() - s;
+    }
+    x.push(e);
+  }
+
+  function run100() {
+    var s = p.now();
+    var e = 0;
+    run20();
+    while (e < 100) {
+      e = p.now() - s;
+    }
+    x.push(e);
+  }
+
+  // Delay this startup be 1s to make sure that the browser is in
+  // a stable state.
+  window.setTimeout(function() {
+    run100a();
+    run100b();
+    run100c();
+    run100d();
+    document.body.innerHTML = "Done:" + x.join('-');
+  }, 1000);
+</script>
+</body>
+</html>
