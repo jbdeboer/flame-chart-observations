@@ -1,0 +1,103 @@
+<html>
+<!-- Investigates when the profiler takes a sample.
+
+  We know the profiler samples every ~1ms, but is it the same time? Random times? Drifting times?
+-->
+<body>
+<script>
+  var x = ['done'];
+  var p = window.performance;
+  var f = Math.floor;
+
+
+  function tenth1() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0 && r < 0.1);
+  }
+   function tenth2() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.1 && r < 0.2);
+  }
+   function tenth3() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.2 && r < 0.3);
+  }
+   function tenth4() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.3 && r < 0.4);
+  }
+   function tenth5() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.4 && r < 0.5);
+  }
+   function tenth6() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.5 && r < 0.6);
+  }
+   function tenth7() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.6 && r < 0.7);
+  }
+   function tenth8() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.7 && r < 0.8);
+  }
+   function tenth9() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.8 && r < 0.9);
+  }
+   function tenth10() {
+    do {
+      var s = p.now();
+      var r = s - f(s);
+    } while (r >=0.9 && r < 1.0);
+  }
+
+  function run100() {
+    var s = p.now();
+    var d = 0;
+    while (d < 100) {
+      tenth1();
+      tenth2();
+      tenth3();
+      tenth4();
+      tenth5();
+      tenth6();
+      tenth7();
+      tenth8();
+      tenth9();
+      tenth10();
+      d = p.now() - s;
+    }
+  }
+
+  // Delay this startup be 1s to make sure that the browser is in
+  // a stable state.
+  window.setTimeout(function() {
+    run100();
+    run100();
+    run100();
+    run100();
+    document.body.innerHTML = "Done:" + x.join('-');
+  }, 1000);
+</script>
+</body>
+</html>

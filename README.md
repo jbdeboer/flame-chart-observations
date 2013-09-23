@@ -37,4 +37,13 @@ run100d calls run100 twice, the aggregated numbers for run100 will include all c
 
 The "self time" and total time" are misreported.  Although they claim to be milliseconds, they are actually the number of samples observed by the flame chart.
    
+Sampling
+--------
 
+The flame chart takes a sample approximately every millisecond.  In practice the rate is ~1.05ms
+
+To measure this, I created 10 busy loop functions, one for each 1/10 of a millisecond.  The flame chart shows that the sample point drifts by ~ 0.05ms per millisecond.
+
+See sample_rate.html for the test.
+
+![Sampling rate drifts](http://www.huronbox.com/~james/flame-chart/tenths.png)
